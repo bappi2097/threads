@@ -1,5 +1,6 @@
 import PostThread from "@/components/forms/PostThread"
 import ProfileHeader from "@/components/shared/ProfileHeader"
+import ThreadsTab from "@/components/shared/ThreadsTab"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { profileTabs } from "@/constants"
 import { fetchUser } from "@/lib/actions/user.actions"
@@ -21,7 +22,7 @@ async function Page({ params }: { params: { id: string } }) {
         authUserId={user.id}
         name={userInfo.name}
         username={userInfo.username}
-        imgUrl={user.imageUrl}
+        imgUrl={userInfo.image}
         bio={userInfo.bio}
       />
       <div className='mt-9'>
@@ -51,7 +52,11 @@ async function Page({ params }: { params: { id: string } }) {
               value={tab.value}
               className='w-full text-light-1'
             >
-              {/* <ThreadsTab/> */}
+              <ThreadsTab
+                currentUserId={user.id}
+                accountId={userInfo.id}
+                accountType='user'
+              />
             </TabsContent>
           ))}
         </Tabs>
